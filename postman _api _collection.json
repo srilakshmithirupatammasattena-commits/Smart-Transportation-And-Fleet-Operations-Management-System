@@ -1,0 +1,394 @@
+{
+  "info": {
+    "name": "Smart Transportation & Fleet Operations API",
+    "description": "Complete API collection for the Smart Transportation Management System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8000" },
+    { "key": "access_token", "value": "" },
+    { "key": "refresh_token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login (Admin)",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "var json = pm.response.json();",
+                "pm.collectionVariables.set('access_token', json.access_token);",
+                "pm.collectionVariables.set('refresh_token', json.refresh_token);",
+                "pm.test('Login successful', () => pm.response.to.have.status(200));"
+              ]
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/auth/login",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"admin@fleet.com\", \"password\": \"Admin@1234\"}"
+            }
+          }
+        },
+        {
+          "name": "Login (Dispatcher)",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/auth/login",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"dispatcher@fleet.com\", \"password\": \"Dispatch@1234\"}"
+            }
+          }
+        },
+        {
+          "name": "Login (Driver)",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/auth/login",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"driver@fleet.com\", \"password\": \"Driver@1234\"}"
+            }
+          }
+        },
+        {
+          "name": "Register New User (Admin only)",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/auth/register",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{access_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"full_name\": \"New Driver\", \"email\": \"newdriver@fleet.com\", \"password\": \"Driver@1234\", \"role\": \"driver\", \"license_number\": \"TN-2024-DL-99999\", \"phone\": \"+91-9999999999\"}"
+            }
+          }
+        },
+        {
+          "name": "Get My Profile",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/auth/me",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }]
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/auth/refresh",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"refresh_token\": \"{{refresh_token}}\"}"
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/auth/logout",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }]
+          }
+        },
+        {
+          "name": "List All Users (Admin)",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/auth/users",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "🚛 Vehicles",
+      "item": [
+        {
+          "name": "List All Vehicles",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/vehicles",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }]
+          }
+        },
+        {
+          "name": "List Vehicles - Filter by Type",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/vehicles?type=truck",
+              "host": ["{{base_url}}"],
+              "path": ["api", "vehicles"],
+              "query": [{ "key": "type", "value": "truck" }]
+            },
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }]
+          }
+        },
+        {
+          "name": "Create Vehicle",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/vehicles",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{access_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"vehicle_id\": \"VH-004\", \"registration_number\": \"TN-04-GH-3456\", \"type\": \"van\", \"make\": \"Mahindra\", \"model\": \"Supro\", \"year\": 2023, \"capacity\": 1500, \"fuel_level_percent\": 90.0}"
+            }
+          }
+        },
+        {
+          "name": "Get Vehicle by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/vehicles/1",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }]
+          }
+        },
+        {
+          "name": "Update Vehicle",
+          "request": {
+            "method": "PUT",
+            "url": "{{base_url}}/api/vehicles/1",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{access_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"fuel_level_percent\": 75.0, \"maintenance_status\": \"operational\"}"
+            }
+          }
+        },
+        {
+          "name": "Delete (Deactivate) Vehicle",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/api/vehicles/4",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }]
+          }
+        },
+        {
+          "name": "Vehicles - Maintenance Due",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/vehicles/maintenance-due",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }]
+          }
+        },
+        {
+          "name": "Vehicles - Low Fuel",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/vehicles/low-fuel",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Routes",
+      "item": [
+        {
+          "name": "List All Routes",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/routes",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }]
+          }
+        },
+        {
+          "name": "Create Route",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/routes",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{access_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"route_code\": \"RT-004\", \"name\": \"Hyderabad to Pune\", \"origin\": \"Hyderabad\", \"destination\": \"Pune\", \"waypoints\": [\"Solapur\", \"Bijapur\"], \"distance_km\": 560.0, \"estimated_duration_minutes\": 540}"
+            }
+          }
+        },
+        {
+          "name": "Get Route by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/routes/1",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }]
+          }
+        },
+        {
+          "name": "Update Route",
+          "request": {
+            "method": "PUT",
+            "url": "{{base_url}}/api/routes/1",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{access_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"estimated_duration_minutes\": 350}"
+            }
+          }
+        },
+        {
+          "name": "Delete Route",
+          "request": {
+            "method": "DELETE",
+            "url": "{{base_url}}/api/routes/4",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Trips",
+      "item": [
+        {
+          "name": "List All Trips",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/trips",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }]
+          }
+        },
+        {
+          "name": "Create Trip",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/trips",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{access_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"trip_code\": \"TR-001\", \"route_id\": 1, \"vehicle_id\": 1, \"driver_id\": 3, \"scheduled_departure\": \"2026-02-22T08:00:00Z\", \"scheduled_arrival\": \"2026-02-22T14:00:00Z\", \"passenger_count\": 0, \"cargo_weight_kg\": 5000.0}"
+            }
+          }
+        },
+        {
+          "name": "Get Trip by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{base_url}}/api/trips/1",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }]
+          }
+        },
+        {
+          "name": "Update Trip Status - Start",
+          "request": {
+            "method": "PATCH",
+            "url": "{{base_url}}/api/trips/1/status",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{access_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"status\": \"in_progress\"}"
+            }
+          }
+        },
+        {
+          "name": "Update Trip Status - Delay",
+          "request": {
+            "method": "PATCH",
+            "url": "{{base_url}}/api/trips/1/status",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{access_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"status\": \"delayed\", \"delay_minutes\": 45, \"delay_reason\": \"Traffic congestion on NH-44\"}"
+            }
+          }
+        },
+        {
+          "name": "Update Trip Status - Complete",
+          "request": {
+            "method": "PATCH",
+            "url": "{{base_url}}/api/trips/1/status",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{access_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"status\": \"completed\", \"fuel_consumed_liters\": 28.5, \"distance_covered_km\": 345.0}"
+            }
+          }
+        },
+        {
+          "name": "Create Alert for Trip",
+          "request": {
+            "method": "POST",
+            "url": "{{base_url}}/api/trips/1/alerts",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{access_token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"alert_type\": \"breakdown\", \"message\": \"Vehicle VH-001 has a flat tyre near Vellore.\"}"
+            }
+          }
+        },
+        {
+          "name": "Resolve Alert",
+          "request": {
+            "method": "PATCH",
+            "url": "{{base_url}}/api/trips/alerts/1/resolve",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }]
+          }
+        },
+        {
+          "name": "Daily Performance Report",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/trips/reports/daily?report_date=2026-02-22",
+              "host": ["{{base_url}}"],
+              "path": ["api", "trips", "reports", "daily"],
+              "query": [{ "key": "report_date", "value": "2026-02-22" }]
+            },
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Root",
+          "request": { "method": "GET", "url": "{{base_url}}/" }
+        },
+        {
+          "name": "Health Check",
+          "request": { "method": "GET", "url": "{{base_url}}/health" }
+        }
+      ]
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-Smart Transportation & Fleet Operations Management System 🚚
+Smart Transportation & Fleet Operations Management System 
 About This Project
 
 This project was developed as part of my internship assignment.
@@ -50,5 +50,6 @@ Python
 Flask
 
 Tools:
+
 
 VS Code

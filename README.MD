@@ -1,39 +1,26 @@
 Smart Transportation & Fleet Operations Management System 
 About This Project
 
-This project was developed as part of my internship assignment.
-The main idea of this system is to manage transportation and fleet operations in a simple and efficient way.
+I developed this project as part of my internship submission.
+The main idea of this system is to manage fleet operations like vehicles, drivers, and routes in a simple and organized way.
 
-It allows users to manage vehicles, drivers, and routes through a user-friendly interface. The project demonstrates my understanding of frontend development, backend logic, and basic system design.
+This project helped me understand how real-world transportation and logistics systems work and how frontend and backend communicate with each other.
 
-Why I Built This
+What This System Does
 
-Transportation and logistics management is an important part of many companies like e-commerce and delivery services.
-Through this project, I wanted to:
+Add and manage vehicles
 
-Practice building a complete system
-
-Improve my coding skills
-
-Understand how fleet management works
-
-Work with real-world use case logic
-
-Features
-
-Add, edit, and delete vehicles
-
-Manage driver details
+Add and manage drivers
 
 Assign routes
 
-View dashboard summary
+Show dashboard overview
 
-Simple and clean interface
+Perform basic CRUD operations
 
-Organized code structure
+Display data in a structured format
 
-Technologies Used
+Technologies I Used
 
 Frontend:
 
@@ -43,7 +30,7 @@ JavaScript
 
 HTML & CSS
 
-Backend (if Python version):
+Backend:
 
 Python
 
@@ -51,5 +38,88 @@ Flask
 
 Tools:
 
-
 VS Code
+
+CodeSandbox
+
+How to Run the Project
+React Version
+
+Make sure Node.js is installed
+
+Open the project folder
+
+Run:
+
+npm install
+
+Then run:
+
+npm start
+
+Open:
+
+http://localhost:3000
+Python (Flask) Version
+
+Make sure Python is installed
+
+Install Flask:
+
+pip install flask
+
+Run the file:
+
+python app.py
+
+Open in browser:
+
+http://127.0.0.1:5000
+Project Architecture (Simple Explanation)
+
+This project follows a basic 3-layer structure:
+
+User → Frontend (React) → Backend (Flask) → Data Storage
+
+The frontend handles the user interface
+
+The backend handles logic and API routes
+
+Data is stored in Python lists (can be upgraded to database later)
+
+Folder Structure
+
+React:
+
+src/
+  App.js
+  components/
+
+Python:
+
+app.py
+templates/
+static/
+What I Learned
+
+How frontend and backend connect
+
+How to create REST APIs
+
+CRUD operations
+
+Component-based development in React
+
+Debugging and fixing errors
+
+Structuring a full project properly
+
+Future Improvements
+
+Connect to a real database
+
+Add login system
+
+Improve UI design
+
+Add real-time tracking

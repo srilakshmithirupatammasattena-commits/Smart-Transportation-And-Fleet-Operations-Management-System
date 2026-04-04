@@ -1,125 +1,185 @@
-Smart Transportation & Fleet Operations Management System 
-About This Project
+🚚 Smart Transportation & Fleet Operations Management System
 
-I developed this project as part of my internship submission.
-The main idea of this system is to manage fleet operations like vehicles, drivers, and routes in a simple and organized way.
+📌 Project Overview
 
-This project helped me understand how real-world transportation and logistics systems work and how frontend and backend communicate with each other.
+This project is a backend system designed to manage transportation and fleet operations efficiently. It focuses on scalable architecture, secure API development, and real-time trip and vehicle management.
 
-What This System Does
+The system enables organizations to manage vehicles, assign trips, monitor operations, and control access based on user roles.
 
-Add and manage vehicles
+---
 
-Add and manage drivers
+🎯 Objective
 
-Assign routes
+To design and develop a scalable transportation management system capable of:
 
-Show dashboard overview
+- Managing vehicle and fleet data
+- Tracking trip and route operations
+- Processing transportation workflows
+- Implementing role-based access control (RBAC)
+- Providing secure REST APIs
+- Ensuring performance, reliability, and data consistency
 
-Perform basic CRUD operations
+---
 
-Display data in a structured format
+🛠 Tech Stack
 
-Technologies I Used
+- Backend: (Spring Boot / FastAPI / Django)
+- Language: (Java / Python / C++)
+- Database: (MySQL / PostgreSQL / MongoDB)
+- Authentication: JWT
+- API Testing: Postman
+- Version Control: GitHub
 
-Frontend:
+---
 
-React.js
+🏗 System Architecture
 
-JavaScript
+The system follows a modular architecture:
 
-HTML & CSS
+- Client → Backend API → Database
+- Modules:
+  - Authentication & Authorization
+  - Vehicle Management
+  - Route & Trip Management
+  - Operations & Monitoring
 
-Backend:
+---
 
-Python
+👤 User Roles
 
-Flask
+- Admin
+  - Manage users, vehicles, and routes
+- Dispatcher
+  - Assign trips and update trip status
+- Driver
+  - View assigned trips and update progress
 
-Tools:
+---
 
-VS Code
+🚗 Core Features
 
-CodeSandbox
+Vehicle & Fleet Management
 
-How to Run the Project
-React Version
+- Add, update, delete vehicles
+- Track fuel status and maintenance status
 
-Make sure Node.js is installed
+Route & Trip Management
 
-Open the project folder
+- Create and manage routes
+- Assign vehicles and drivers to trips
+- Track trip status:
+  - Scheduled
+  - In Progress
+  - Completed
+  - Delayed
 
-Run:
+Operations & Monitoring
 
-npm install
+- Delay alerts
+- Maintenance reminders
+- Trip performance tracking
 
-Then run:
+---
 
-npm start
+🔐 Authentication & Security
 
-Open:
+- JWT-based authentication
+- Password hashing (BCrypt)
+- Role-based API authorization
+- Secure endpoints with access control
 
-http://localhost:3000
-Python (Flask) Version
+---
 
-Make sure Python is installed
+🔗 REST API Endpoints
 
-Install Flask:
+Auth
 
-pip install flask
+- POST "/api/auth/login"
+- POST "/api/auth/register"
 
-Run the file:
+Vehicles
 
-python app.py
+- GET "/api/vehicles"
+- POST "/api/vehicles"
+- PUT "/api/vehicles/{id}"
+- DELETE "/api/vehicles/{id}"
 
-Open in browser:
+Routes
 
-http://127.0.0.1:5000
-Project Architecture (Simple Explanation)
+- GET "/api/routes"
+- POST "/api/routes"
 
-This project follows a basic 3-layer structure:
+Trips
 
-User → Frontend (React) → Backend (Flask) → Data Storage
+- GET "/api/trips"
+- POST "/api/trips"
+- PUT "/api/trips/{id}/status"
 
-The frontend handles the user interface
+---
 
-The backend handles logic and API routes
+📸 System Overview
 
-Data is stored in Python lists (can be upgraded to database later)
+"System Overview" (./screenshots/system-overview.png)
 
-Folder Structure
+---
 
-React:
+🧪 Testing
+
+- API testing using Postman
+- Unit tests for core modules
+- Proper exception handling and logging
+
+---
+
+⚙️ Setup Instructions
+
+1. Clone the repository
+   
+   git clone <your-repo-link>
+
+2. Navigate to project folder
+   
+   cd project-folder
+
+3. Install dependencies
+
+4. Configure database
+
+5. Run the application
+
+---
+
+📦 Project Structure
 
 src/
-  App.js
-  components/
+ ├── controllers/
+ ├── services/
+ ├── models/
+ ├── repositories/
+ └── config/
 
-Python:
+---
 
-app.py
-templates/
-static/
-What I Learned
+🎥 Demo Video
 
-How frontend and backend connect
+[Add your demo video link here]
 
-How to create REST APIs
+---
 
-CRUD operations
+📬 Postman Collection
 
-Component-based development in React
+[Add Postman collection link or file]
 
-Debugging and fixing errors
+---
 
-Structuring a full project properly
+🚀 Deployment (Optional)
 
-Future Improvements
+Deployed on: (AWS / Render / Railway)
 
-Connect to a real database
+---
 
-Add login system
+📌 Conclusion
 
-Improve UI design
+This project demonstrates backend development skills including system design, API development, authentication, and scalable architecture required for real-world transportation systems.
 
-Add real-time tracking
+---
